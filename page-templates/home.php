@@ -40,7 +40,7 @@ get_header();
 
 <div class="section-register" id="register">
 	<div class="container">
-		<h2 class="text-center">Register</h2>
+		<h2 class="text-center">Buy a Ticket</h2>
 		<?php the_field('home_registration_embed_code'); ?>
 	</div>
 </div>
