@@ -146,15 +146,9 @@ img.aligncenter {
         }
 
         .logo-wrap {
-            margin-right: 20px;
-
             img {
                 width: 250px;
             }
-        }
-
-        .logo-wrap + div {
-            margin-left: 20px;
         }
 
         @include media-breakpoint-down(sm) {
@@ -248,7 +242,7 @@ img.aligncenter {
 .page-template-home .section-register {
     padding-top: 60px;
     padding-bottom: 60px;
-    background-color: $dark_blue;
+    background-color: $light_blue;
     color: #FFFFFF;
 
     h2 {

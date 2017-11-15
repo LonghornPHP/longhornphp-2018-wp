@@ -6,10 +6,10 @@ get_header();
 <div class="top-section" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>">
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
-			<div class="text-center col-auto logo-wrap">
+			<div class="text-left col-sm-4 logo-wrap">
 				<?php echo wp_get_attachment_image( get_field('logo', 'options'), 'large' ); ?>
 			</div>
-			<div class="text-center col-auto">
+			<div class="text-center col-sm-8">
 				<?php while ( have_posts() ) : the_post(); ?>
 					<div class="entry-content">
 						<?php the_content(); ?>
@@ -21,27 +21,23 @@ get_header();
 	</div>
 </div>
 
+<div class="section-register" id="register">
+	<div class="container">
+		<h2 class="text-center">Buy a Ticket</h2>
+		<?php the_field('home_registration_embed_code'); ?>
+	</div>
+</div>
+
 <div
 	class="section-about"
 	style="background-image: url('<?php echo wp_get_attachment_image_url( get_field('home_description_image'), 'large' ); ?>');">
 	<div class="container">
 		<div class="row">
-			<!-- <div class="col-md-6 col-lg-7 align-self-center order-2 order-md-1"> -->
 			<div class="col-md-10 col-lg-8 mx-auto text-center">
 				<?php the_field('home_description_content'); ?>
 				<?php the_field('home_description_mailchimp_embed'); ?>
 			</div>
-			<!-- <div class="col-md-6 col-lg-5 align-self-center order-1 order-md-2">
-				<?php echo wp_get_attachment_image( get_field('home_description_image'), 'large' ); ?>
-			</div> -->
 		</div>
-	</div>
-</div>
-
-<div class="section-register" id="register">
-	<div class="container">
-		<h2 class="text-center">Buy a Ticket</h2>
-		<?php the_field('home_registration_embed_code'); ?>
 	</div>
 </div>
 
