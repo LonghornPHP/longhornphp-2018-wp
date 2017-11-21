@@ -15,6 +15,12 @@
 <meta name="msapplication-config" content="/icons/browserconfig.xml?v=juPH7Puthev2">
 <meta name="theme-color" content="#ffffff">
 
+<script>
+    dataLayer = [{
+        'user_is_logged_in': '<?php echo is_user_logged_in() ? 'true' : 'false'; ?>'
+    }];
+</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
