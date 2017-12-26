@@ -100,9 +100,32 @@ function lphp_get_sponsorship_tier_query($tier = '') {
 
 add_filter('acf/settings/remove_wp_meta_box', '__return_false');
 
+function allow_svg_uploads($mimes) {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg_uploads');
+
+add_filter( 'wpseo_metabox_prio', 'lower_yoast_priority' );
+function lower_yoast_priority() {
+	return 'low';
+}
+
+add_action( 'after_setup_theme', 'lphp_add_image_sizes' );
+function lphp_add_image_sizes() {
+	add_image_size( 'lphp-large-square', 600, 600, true );
+	add_image_size( 'lphp-medium-square', 300, 300, true );
+}
+
 /**
  * Bootstrap menu walker
  */
 require get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
 
+require get_template_directory() . '/inc/acf-customizations.php';
+
 require get_template_directory() . '/inc/sponsor-post-type.php';
+
+require get_template_directory() . '/inc/speaker-post-type.php';
+
+require get_template_directory() . '/inc/session-post-type.php';

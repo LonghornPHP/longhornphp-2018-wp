@@ -19,6 +19,9 @@ mix.setPublicPath('./')
     .autoload({
         'popper.js/dist/umd/popper.js': ['Popper']
     })
+    .options({
+        processCssUrls: false
+    })
     .js(
         [
             'node_modules/@cmyee/pushy/js/pushy.js',
