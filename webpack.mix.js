@@ -15,7 +15,12 @@ require('dotenv').config();
 // You can set up a `.env` file in your project root (see `.env.sample`) or just override the default proxy URL here.
 let proxy_url = process.env.BROWSERSYNC_PROXY_URL || 'local.wordpress.dev';
 
-mix.setPublicPath('./')
+mix.setPublicPath(path.resolve('./'))
+    .webpackConfig({
+        externals: {
+            'jquery': 'jQuery'
+        }
+    })
     .autoload({
         'popper.js/dist/umd/popper.js': ['Popper']
     })
