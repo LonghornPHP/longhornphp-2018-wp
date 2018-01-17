@@ -46,27 +46,31 @@ endif;
             <?php while ( have_posts() ) : the_post(); ?>
 
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <header>
-                        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-                    </header>
-                    <div class="entry-content">
-                        <?php the_content(); ?>
-                        <?php if (isset($message)) : ?>
-                            <p><?php echo $message; ?></p>
-                        <?php else : ?>
-                            <form method="POST">
-                              <script
-                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                data-key="<?php echo $publicKey; ?>"
-                                data-amount="<?php echo $charge; ?>"
-                                data-name="<?php echo $invoice_name; ?>"
-                                data-description="<?php echo $invoice_description; ?>"
-                                data-locale="auto"
-                                data-zip-code="true">
-                              </script>
-                            </form>
-                        <?php endif; ?>
-                    </div>
+                    <?php if ( !post_password_required() ) : ?>
+                        <header>
+                            <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+                        </header>
+                        <div class="entry-content">
+                            <?php the_content(); ?>
+                            <?php if (isset($message)) : ?>
+                                <p><?php echo $message; ?></p>
+                            <?php else : ?>
+                                <form method="POST">
+                                  <script
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="<?php echo $publicKey; ?>"
+                                    data-amount="<?php echo $charge; ?>"
+                                    data-name="<?php echo $invoice_name; ?>"
+                                    data-description="<?php echo $invoice_description; ?>"
+                                    data-locale="auto"
+                                    data-zip-code="true">
+                                  </script>
+                                </form>
+                            <?php endif; ?>
+                        </div>
+                    <?php else : ?>
+                        <?php echo get_the_password_form(); ?>
+                    <?php endif; ?>
                 </article>
 
             <?php endwhile; ?>
