@@ -15,6 +15,8 @@
 <meta name="msapplication-config" content="/icons/browserconfig.xml?v=juPH7Puthev2">
 <meta name="theme-color" content="#ffffff">
 
+<!-- deploy test -->
+
 <script>
     dataLayer = [{
         'user_is_logged_in': '<?php echo is_user_logged_in() ? 'true' : 'false'; ?>'
