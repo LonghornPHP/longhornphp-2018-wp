@@ -19,21 +19,23 @@ if (count($_POST)):
 
     $secretKey = ($_GET['testMode'] ?? false) ? get_field('stripe_secret_key_test', 'options') : get_field('stripe_secret_key', 'options');
 
-    $ch = curl_init('https://api.stripe.com/v1/charges');
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_USERPWD => $secretKey . ':',
-        CURLOPT_HTTPHEADER => ['Content-type: application/x-www-form-urlencoded'],
-        CURLOPT_POSTFIELDS => http_build_query([
-            'amount' => $charge,
-            'currency' => 'usd',
-            'description' => $invoice_description,
-            'source' => $token,
-            'receipt_email' => $email
-        ])
-    ]);
-    $res = curl_exec($ch);
-    $message = curl_getinfo($ch)['http_code'] === 200 ? 'Payment processed successfully!' : 'Payment failed: ' . json_decode($res)->error->message;
+    if ($token && $email && $secretKey) {
+        $ch = curl_init('https://api.stripe.com/v1/charges');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => $secretKey . ':',
+            CURLOPT_HTTPHEADER => ['Content-type: application/x-www-form-urlencoded'],
+            CURLOPT_POSTFIELDS => http_build_query([
+                'amount' => $charge,
+                'currency' => 'usd',
+                'description' => $invoice_description,
+                'source' => $token,
+                'receipt_email' => $email
+            ])
+        ]);
+        $res = curl_exec($ch);
+        $message = curl_getinfo($ch)['http_code'] === 200 ? 'Payment processed successfully!' : 'Payment failed: ' . json_decode($res)->error->message;
+    }
 endif;
 
 ?>
