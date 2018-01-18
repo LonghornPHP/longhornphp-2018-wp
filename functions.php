@@ -129,3 +129,5 @@ require get_template_directory() . '/inc/sponsor-post-type.php';
 require get_template_directory() . '/inc/speaker-post-type.php';
 
 require get_template_directory() . '/inc/session-post-type.php';
+
+require get_template_directory() . '/inc/invoice-post-type.php';

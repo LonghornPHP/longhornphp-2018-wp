@@ -1,5 +1,4 @@
 <?php
-/* Template Name: Invoice */
 get_header();
 
 $publicKey = ($_GET['testMode'] ?? false) ? get_field('stripe_public_key_test', 'options') : get_field('stripe_public_key', 'options');

@@ -1,6 +1,6 @@
 {
     "key": "group_5a5fb1cc5eaf5",
-    "title": "Invoice Page Options",
+    "title": "Invoice Options",
     "fields": [
         {
             "key": "field_5a5fb1d6eb97a",
@@ -84,9 +84,9 @@
     "location": [
         [
             {
-                "param": "page_template",
+                "param": "post_type",
                 "operator": "==",
-                "value": "page-templates\/invoice.php"
+                "value": "lphp_invoice"
             }
         ]
     ],
@@ -98,5 +98,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516221746
+    "modified": 1516305819
 }
