@@ -352,3 +352,15 @@ img.aligncenter {
     width: 100% !important;
     height: 100% !important;
 }
+
+.gallery {
+    .gallery-item {
+        margin-right: 15px;
+    }
+
+    @include media-breakpoint-up(lg) {
+        .gallery-item {
+            margin-right: 0;
+        }
+    }
+}
