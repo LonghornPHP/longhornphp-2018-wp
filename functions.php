@@ -32,6 +32,73 @@ function base_theme_content_width() {
 }
 add_action( 'after_setup_theme', 'base_theme_content_width', 0 );
 
+function get_speakers_by_type($types = []) {
+	$args = [
+		'post_type' => 'speaker',
+		'posts_per_page' => -1,
+		'post_status' => (isset($_GET['include_drafts']) && is_user_logged_in()) ? ['draft', 'publish'] : 'publish',
+		'order' => 'ASC',
+		'orderby' => 'title',
+		'tax_query' => ['relation' => 'OR'],
+	];
+
+	foreach ( $types as $type ) {
+		$args['tax_query'][] = [
+			'taxonomy' => 'speaker_type',
+			'field' => 'slug',
+			'terms' => $type,
+		];
+	}
+
+	return get_posts( $args );
+}
+
+
+function fill_speakers_with_talks($speakers) {
+	global $wpdb;
+
+	// First, get the session IDs associated with the speakers
+	$speaker_ids = array_map(function($speaker) {
+		return $speaker->ID;
+	}, $speakers);
+
+	$query = 'SELECT post_id, meta_value from ' . $wpdb->prefix . 'postmeta ';
+	$query .= 'WHERE meta_key = "speaker_session_relationship" ';
+	$query .= 'AND meta_value != ""';
+	$query .= 'AND post_id IN (' . implode(', ', array_fill(0, count($speaker_ids), '%d')) . ')';
+	$results = $wpdb->get_results( $wpdb->prepare($query, $speaker_ids), ARRAY_A );
+	$session_ids = [];
+	foreach ($results as $result) {
+		$session_ids[$result['post_id']] = unserialize($result['meta_value']);
+	}
+	$flattened_session_ids = call_user_func_array('array_merge', $session_ids);
+
+	$sessions = get_posts([
+		'post_type' => 'session',
+		'posts_per_page' => -1,
+		'post__in' => $flattened_session_ids,
+		'post_status' => (isset($_GET['include_drafts']) && is_user_logged_in()) ? ['draft', 'publish'] : 'publish',
+	]);
+
+	foreach ($speakers as $speaker) {
+		$speaker->sessions = [];
+	}
+
+	foreach ($session_ids as $speaker_id => $speaker_session_ids) {
+		foreach ($speakers as $speaker) {
+			if ($speaker->ID === $speaker_id) {
+				$speaker->sessions = array_filter($sessions, function($session) use ($speaker_session_ids) {
+					if (in_array($session->ID, $speaker_session_ids)) {
+						return true;
+					}
+				});
+				break;
+			}
+		}
+	}
+
+	return $speakers;
+}
 
 function base_theme_widgets_init() {
 	register_sidebar( array(
