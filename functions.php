@@ -71,7 +71,7 @@ function fill_speakers_with_talks($speakers) {
 	foreach ($results as $result) {
 		$session_ids[$result['post_id']] = unserialize($result['meta_value']);
 	}
-	$flattened_session_ids = call_user_func_array('array_merge', $session_ids);
+	$flattened_session_ids = empty($session_ids) ? [] : call_user_func_array('array_merge', $session_ids);
 
 	$sessions = get_posts([
 		'post_type' => 'session',
