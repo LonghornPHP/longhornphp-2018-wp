@@ -83,11 +83,13 @@ get_header();
 
 <div class="section-sponsors" id="sponsors">
 	<div class="container">
-		<div class="text-center">
+		<div class="text-center mb-4">
 			<h2>Sponsors</h2>
 			<?php the_field('home_sponsors_intro'); ?>
 		</div>
-		<?php get_template_part( 'template-parts/sponsors' ); ?>
+		<div class="sponsors-list">
+			<?php get_template_part( 'template-parts/sponsors' ); ?>
+		</div>
 	</div>
 </div>
 
