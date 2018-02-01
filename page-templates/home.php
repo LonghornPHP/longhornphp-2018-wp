@@ -61,8 +61,6 @@ get_header();
 				</div>
 			<?php endwhile; ?>
 		</div>
-
-		<p class="text-center"><em>More keynotes to be announced</em></p>
 	</div>
 </div>
 
