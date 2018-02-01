@@ -121,7 +121,6 @@ function base_theme_scripts() {
 
 	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );
 	wp_enqueue_style( 'longhornphp-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lora:400,700' );
-	wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' );
 	wp_enqueue_style( 'mailchimp-embed', '//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css' );
 
 	if ( strpos( $url, '.dev' ) !== false && file_exists( get_template_directory() . '/hot' ) ) {
@@ -133,8 +132,8 @@ function base_theme_scripts() {
 add_action( 'wp_enqueue_scripts', 'base_theme_scripts' );
 
 function lphp_menu_social_icons($items, $args) {
-	$items = str_replace('>Facebook<', '><i class="fa fa-facebook" aria-hidden="true"></i><', $items);
-	$items = str_replace('>Twitter<', '><i class="fa fa-twitter" aria-hidden="true"></i><', $items);
+	$items = str_replace('>Facebook<', '><i class="fab fa-facebook-f"></i><', $items);
+	$items = str_replace('>Twitter<', '><i class="fab fa-twitter"></i><', $items);
 	return $items;
 }
 add_filter( 'wp_nav_menu_items', 'lphp_menu_social_icons', 10, 2 );
