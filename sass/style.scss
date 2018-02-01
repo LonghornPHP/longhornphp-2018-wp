@@ -378,3 +378,21 @@ img.aligncenter {
         }
     }
 }
+
+.speaker-card {
+    .meta {
+        font-size: 90%;
+
+        p {
+            margin-bottom: 5px;
+        }
+    }
+
+    .twitter-link {
+        color: $red;
+
+        a {
+            color: $red;
+        }
+    }
+}
