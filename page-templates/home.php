@@ -6,7 +6,7 @@ get_header();
 <div class="top-section" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>">
 	<div class="container">
 		<div class="row justify-content-center align-items-center">
-			<div class="text-left col-sm-4 logo-wrap">
+			<div class="text-center text-sm-left col-sm-4 logo-wrap">
 				<?php echo wp_get_attachment_image( get_field('logo', 'options'), 'large' ); ?>
 			</div>
 			<div class="text-center col-sm-8">
@@ -51,7 +51,7 @@ get_header();
 
 		<div class="row justify-content-center">
 			<?php while ($keynoters->have_posts()) : $keynoters->the_post(); ?>
-				<div class="col-12 col-md col-lg-3">
+				<div class="col-6 col-md-4 col-lg-2">
 					<div class="card">
 						<?php the_post_thumbnail( 'large', ['alt' => get_the_title(get_the_ID()), 'class' => 'card-img-top'] ); ?>
 						<div class="card-body">
@@ -60,11 +60,18 @@ get_header();
 					</div>
 				</div>
 			<?php endwhile; ?>
+			<?php wp_reset_postdata(); ?>
+		</div>
+
+		<div class="row">
+			<div class="col-6 mx-auto">
+				<?php the_field('home_speakers_content'); ?>
+			</div>
 		</div>
 	</div>
 </div>
 
-<?php endif; wp_reset_postdata(); ?>
+<?php endif; ?>
 
 <div
 	class="section-about"

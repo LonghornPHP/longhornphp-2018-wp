@@ -59,9 +59,11 @@ img.aligncenter {
     }
 }
 
-.close-side-menu .fa {
+.close-side-menu {
     color: #FFFFFF;
-    cursor: pointer;
+    svg {
+        cursor: pointer;
+    }
 }
 
 .navbar-brand.logo-wrap img {
@@ -281,6 +283,8 @@ img.aligncenter {
     .card-body {
         background: transparent;
         text-align: center;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 

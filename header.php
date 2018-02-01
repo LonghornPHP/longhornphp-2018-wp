@@ -13,7 +13,7 @@
 		</button>
 
 		<div id="primaryMenuItems" class="menu-container navbar-collapse pushy pushy-right">
-			<div class="close-side-menu text-right mt-3 d-md-none"><i class="pushy-link fa fa-times-circle" aria-hidden="true"></i></div>
+			<div class="close-side-menu text-right mt-3 d-md-none"><span class="pushy-link"><i class="fas fa-times-circle" aria-hidden="true"></i></span></div>
 			<?php wp_nav_menu( array(
 				'theme_location'    => 'primary',
 				'depth'             => 2,
