@@ -26,37 +26,24 @@ get_header();
             endif; ?>
 
             <?php
-                $keynote_speakers = get_speakers_by_type(['keynote-speaker']);
-                $keynote_speakers = fill_speakers_with_talks($keynote_speakers);
-                $tutorial_speakers = get_speakers_by_type(['tutorial-speaker']);
-                $tutorial_speakers = fill_speakers_with_talks($tutorial_speakers);
-                $regular_speakers = get_speakers_by_type(['regular-speaker']);
-                $regular_speakers = fill_speakers_with_talks($regular_speakers);
+                $keynotes = get_sessions_by_type(['keynote']);
+                $keynotes = fill_sessions_with_speakers($keynotes);
+                $tutorials = get_sessions_by_type(['tutorial']);
+                $tutorials = fill_sessions_with_speakers($tutorials);
+                $regulars = get_sessions_by_type(['regular']);
+                $regulars = fill_sessions_with_speakers($regulars);
             ?>
-
             <div class="list-group">
-                <?php foreach ($keynote_speakers as $speaker) : ?>
-                    <?php foreach ($speaker->sessions as $session) : ?>
-                        <?php if (has_term( 'keynote', 'session_type', $session->ID )) : ?>
-                            <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                <?php foreach ($keynotes as $session) : ?>
+                    <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
                 <?php endforeach; ?>
 
-                <?php foreach ($tutorial_speakers as $speaker) : ?>
-                    <?php foreach ($speaker->sessions as $session) : ?>
-                        <?php if (has_term( 'tutorial', 'session_type', $session->ID )) : ?>
-                            <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                <?php foreach ($tutorials as $session) : ?>
+                    <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
                 <?php endforeach; ?>
 
-                <?php foreach ($regular_speakers as $speaker) : ?>
-                    <?php foreach ($speaker->sessions as $session) : ?>
-                        <?php if (has_term( 'regular', 'session_type', $session->ID )) : ?>
-                            <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                <?php foreach ($regulars as $session) : ?>
+                    <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
                 <?php endforeach; ?>
             </div>
         </main>

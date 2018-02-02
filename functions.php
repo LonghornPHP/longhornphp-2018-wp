@@ -36,7 +36,7 @@ function get_speakers_by_type($types = []) {
 	$args = [
 		'post_type' => 'speaker',
 		'posts_per_page' => -1,
-		'post_status' => (isset($_GET['include_drafts']) && is_user_logged_in()) ? ['draft', 'publish'] : 'publish',
+		'post_status' => 'publish',
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'tax_query' => ['relation' => 'OR'],
@@ -52,7 +52,6 @@ function get_speakers_by_type($types = []) {
 
 	return get_posts( $args );
 }
-
 
 function fill_speakers_with_talks($speakers) {
 	global $wpdb;
@@ -77,7 +76,7 @@ function fill_speakers_with_talks($speakers) {
 		'post_type' => 'session',
 		'posts_per_page' => -1,
 		'post__in' => $flattened_session_ids,
-		'post_status' => (isset($_GET['include_drafts']) && is_user_logged_in()) ? ['draft', 'publish'] : 'publish',
+		'post_status' => 'publish',
 	]);
 
 	foreach ($speakers as $speaker) {
@@ -100,6 +99,77 @@ function fill_speakers_with_talks($speakers) {
 	return $speakers;
 }
 
+function get_sessions_by_type($types = []) {
+	$args = [
+		'post_type' => 'session',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'order' => 'ASC',
+		'orderby' => 'title',
+		'tax_query' => ['relation' => 'OR'],
+	];
+
+	foreach ( $types as $type ) {
+		$args['tax_query'][] = [
+			'taxonomy' => 'session_type',
+			'field' => 'slug',
+			'terms' => $type,
+		];
+	}
+
+	return get_posts( $args );
+}
+
+function fill_sessions_with_speakers($sessions) {
+	if (!$sessions) {
+		return $sessions;
+	}
+
+    global $wpdb;
+
+    // First, get the speaker IDs associated with the sessions
+    $session_ids = array_map(function($session) {
+        return $session->ID;
+    }, $sessions);
+
+    $query = 'SELECT post_id, meta_value from ' . $wpdb->prefix . 'postmeta ';
+    $query .= 'WHERE meta_key = "speaker_session_relationship" ';
+    $query .= 'AND meta_value != ""';
+    $query .= 'AND post_id IN (' . implode(', ', array_fill(0, count($session_ids), '%d')) . ')';
+    $results = $wpdb->get_results( $wpdb->prepare($query, $session_ids), ARRAY_A );
+    $speaker_ids = [];
+    foreach ($results as $result) {
+        $speaker_ids[$result['post_id']] = unserialize($result['meta_value']);
+    }
+    $flattened_speaker_ids = empty($speaker_ids) ? [] : call_user_func_array('array_merge', $speaker_ids);
+
+    $speakers = get_posts([
+        'post_type' => 'speaker',
+        'posts_per_page' => -1,
+        'post__in' => $flattened_speaker_ids,
+        'post_status' => 'publish',
+    ]);
+
+    foreach ($sessions as $session) {
+        $session->speakers = [];
+    }
+
+    foreach ($speaker_ids as $session_id => $session_speaker_ids) {
+        foreach ($sessions as $session) {
+            if ($session->ID === $session_id) {
+                $session->speakers = array_values(array_filter($speakers, function($speaker) use ($session_speaker_ids) {
+                    if (in_array($speaker->ID, $session_speaker_ids)) {
+                        return true;
+                    }
+                }));
+                break;
+            }
+        }
+    }
+
+    return $sessions;
+}
+
 function base_theme_widgets_init() {
 	register_sidebar( array(
 		'name'          => 'Primary Sidebar',
@@ -116,7 +186,7 @@ add_action( 'widgets_init', 'base_theme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function base_theme_scripts() {
-	$version = '20180201';
+	$version = '20180202';
 	$url = get_site_url();
 
 	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );

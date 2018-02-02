@@ -420,4 +420,21 @@ img.aligncenter {
     .description {
         padding-left: 32px;
     }
+
+    .session-type {
+        &.keynote {
+            background-color: #B41F30;
+            color: #FFFFFF;
+        }
+
+        &.tutorial {
+            background-color: #00266A;
+            color: #FFFFFF;
+        }
+
+        &.regular {
+            background-color: #8BD6FD;
+            color: #000000;
+        }
+    }
 }
