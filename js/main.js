@@ -9,4 +9,11 @@ jQuery(document).ready(function($){
             $('.tito-discount-code-field').val('');
         })
     }
+
+    if ($('.page-template-sessions').length && window.location.hash != '') {
+        let talk_id = window.location.hash + '-description';
+        if ($(talk_id).length) {
+            $(talk_id).collapse('show');
+        }
+    }
 });

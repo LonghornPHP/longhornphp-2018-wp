@@ -33,18 +33,32 @@ get_header();
                 $regulars = get_sessions_by_type(['regular']);
                 $regulars = fill_sessions_with_speakers($regulars);
             ?>
-            <div class="list-group">
-                <?php foreach ($keynotes as $session) : ?>
-                    <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
-                <?php endforeach; ?>
 
-                <?php foreach ($tutorials as $session) : ?>
-                    <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
-                <?php endforeach; ?>
+            <div class="session-list">
+                <h2>Keynotes</h2>
+                <div class="list-group">
+                    <?php foreach ($keynotes as $session) : ?>
+                        <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
 
-                <?php foreach ($regulars as $session) : ?>
-                    <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
-                <?php endforeach; ?>
+            <div class="session-list">
+                <h2>Tutorials</h2>
+                <div class="list-group">
+                    <?php foreach ($tutorials as $session) : ?>
+                        <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="session-list">
+                <h2>Talks</h2>
+                <div class="list-group">
+                    <?php foreach ($regulars as $session) : ?>
+                        <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </main>
     </div>
