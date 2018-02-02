@@ -80,7 +80,7 @@ img.aligncenter {
             position: relative;
 
             @include media-breakpoint-up(md) {
-                &:after {
+                &:not(.dropdown-toggle):after {
                     content: "";
                     display: block;
                     background: transparent;
@@ -101,7 +101,7 @@ img.aligncenter {
             .nav-link.active,
             .nav-link:hover,
             .nav-link:focus {
-                &:after {
+                &:not(.dropdown-toggle):after {
                     background: #FFFFFF;
                 }
             }
@@ -398,5 +398,26 @@ img.aligncenter {
         a {
             color: $red;
         }
+    }
+}
+
+.page-template-sessions {
+    .fa-user {
+        font-size: 70%;
+        vertical-align: baseline;
+    }
+
+    .toggle {
+        font-size: 24px;
+        margin-right: 10px;
+        cursor: pointer;
+
+        svg {
+            vertical-align: top;
+        }
+    }
+
+    .description {
+        padding-left: 32px;
     }
 }

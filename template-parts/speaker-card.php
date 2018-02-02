@@ -38,7 +38,11 @@
                     <ul class="list-unstyled">
                         <?php foreach ($speaker->sessions as $session) : ?>
                             <li class="d-flex align-items-start border-bottom border-light mb-3 pb-2">
-                                <span class="mr-2"><?php echo esc_html( $session->post_title ); ?></span>
+                                <a
+                                    href="<?php the_field('sessions_page', 'options'); ?>#<?php echo esc_attr( $session->post_name ); ?>"
+                                    class="mr-2">
+                                    <?php echo esc_html( $session->post_title ); ?>
+                                </a>
                                 <?php $type = get_the_terms( $session->ID, 'session_type' ); ?>
                                 <?php if (!empty($type)) : ?>
                                     <span class="badge badge-light badge-pill ml-auto">
