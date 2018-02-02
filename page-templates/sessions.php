@@ -32,13 +32,30 @@ get_header();
                 $tutorial_speakers = fill_speakers_with_talks($tutorial_speakers);
                 $regular_speakers = get_speakers_by_type(['regular-speaker']);
                 $regular_speakers = fill_speakers_with_talks($regular_speakers);
-                $speakers = array_merge($keynote_speakers, $tutorial_speakers, $regular_speakers);
             ?>
 
             <div class="list-group">
-                <?php foreach ($speakers as $speaker) : ?>
+                <?php foreach ($keynote_speakers as $speaker) : ?>
                     <?php foreach ($speaker->sessions as $session) : ?>
-                        <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                        <?php if (has_term( 'keynote', 'session_type', $session->ID )) : ?>
+                            <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+
+                <?php foreach ($tutorial_speakers as $speaker) : ?>
+                    <?php foreach ($speaker->sessions as $session) : ?>
+                        <?php if (has_term( 'tutorial', 'session_type', $session->ID )) : ?>
+                            <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+
+                <?php foreach ($regular_speakers as $speaker) : ?>
+                    <?php foreach ($speaker->sessions as $session) : ?>
+                        <?php if (has_term( 'regular', 'session_type', $session->ID )) : ?>
+                            <?php include get_template_directory() . '/template-parts/session-card.php'; ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
             </div>
