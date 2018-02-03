@@ -443,12 +443,27 @@ img.aligncenter {
         margin-bottom: 60px;
     }
 
-    .session-card > div:first-child {
-        cursor: pointer;
+    .session-card {
+        .img-wrap {
+            width: 60px;
 
-        &:not(.collapsed) {
-            .toggle svg {
-                transform: rotate(90deg);
+            + .title {
+                width: calc(100% - 60px);
+            }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        > div:first-child {
+            cursor: pointer;
+
+            &:not(.collapsed) {
+                .toggle svg {
+                    transform: rotate(90deg);
+                }
             }
         }
     }
@@ -470,7 +485,9 @@ img.aligncenter {
     }
 
     .description {
-        padding-left: 32px;
+        @include media-breakpoint-up(md) {
+            padding-left: 80px;
+        }
     }
 
     .session-type {
