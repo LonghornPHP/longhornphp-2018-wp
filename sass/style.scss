@@ -173,10 +173,10 @@ img.aligncenter {
 
     .site-content {
         padding-top: 0;
+        padding-bottom: 0;
     }
 
     .top-section {
-        background-size: 125px 119.5px;
         padding: 40px 0;
 
         .h1 {
@@ -280,8 +280,8 @@ img.aligncenter {
 .page-template-home .section-register {
     padding-top: 60px;
     padding-bottom: 60px;
-    background-color: $light_blue;
-    color: #FFFFFF;
+    background-size: 125px 119.5px;
+    color: $dark_blue;
 
     h2 {
         margin-bottom: 30px;
@@ -306,6 +306,7 @@ img.aligncenter {
     padding-top: 40px;
     padding-bottom: 40px;
     background-image: url('../img/pentagon_bg.png');
+    text-align: center;
 
     .title {
         margin-bottom: 20px;
@@ -321,6 +322,10 @@ img.aligncenter {
         text-align: center;
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .card-img-top {
+        border-radius: 0;
     }
 }
 
@@ -382,10 +387,6 @@ img.aligncenter {
     color: #FFFFFF;
     background-color: $dark_blue;
     text-align: center;
-
-    hr {
-        background-color: rgba(255, 255, 255, 0.5);
-    }
 
     a {
         color: #FFFFFF;
