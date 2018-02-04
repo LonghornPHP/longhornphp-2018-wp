@@ -186,7 +186,7 @@ add_action( 'widgets_init', 'base_theme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function base_theme_scripts() {
-	$version = '20180204';
+	$version = '201802042';
 	$url = get_site_url();
 
 	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );
@@ -258,6 +258,13 @@ function lphp_add_gallery_classes( $output ) {
 	$output = str_replace('gallery-columns-5', 'gallery-columns-5 d-flex justify-content-start justify-content-lg-between flex-wrap', $output);
 	return $output;
 }
+
+add_filter( 'lphp_post_content', 'wptexturize' );
+add_filter( 'lphp_post_content', 'convert_smilies' );
+add_filter( 'lphp_post_content', 'convert_chars' );
+add_filter( 'lphp_post_content', 'wpautop' );
+add_filter( 'lphp_post_content', 'shortcode_unautop' );
+add_filter( 'lphp_post_content', 'do_shortcode' );
 
 /**
  * Bootstrap menu walker
