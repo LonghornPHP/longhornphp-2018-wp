@@ -16,4 +16,8 @@ jQuery(document).ready(function($){
             $(talk_id).collapse('show');
         }
     }
+
+    if ($('.page-template-venue').length) {
+        $('.page-template-venue').scrollspy({ target: '#venue-nav', offset: 50 });
+    }
 });

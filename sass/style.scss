@@ -507,3 +507,21 @@ img.aligncenter {
         }
     }
 }
+
+.page-template-venue {
+    position: relative;
+
+    .site-main {
+        margin-bottom: 40px;
+    }
+
+    .venue-nav {
+        @include media-breakpoint-down(sm) {
+            margin-bottom: 40px;
+        }
+    }
+
+    .venue-sections section {
+        padding-bottom: 20px;
+    }
+}
