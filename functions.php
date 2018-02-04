@@ -266,6 +266,16 @@ add_filter( 'lphp_post_content', 'wpautop' );
 add_filter( 'lphp_post_content', 'shortcode_unautop' );
 add_filter( 'lphp_post_content', 'do_shortcode' );
 
+function lphp_get_stars_for_level($level) {
+    $html = '';
+    $counts = ['beginner' => 1, 'intermediate' => 2, 'advanced' => 3];
+    for ($i = 0; $i < $counts[$level]; $i++) {
+        $html .= '<i class="fas fa-star"></i>';
+    }
+
+    return $html;
+}
+
 /**
  * Bootstrap menu walker
  */

@@ -441,14 +441,22 @@ img.aligncenter {
 .page-template-sessions {
     .session-list {
         margin-bottom: 60px;
+
+        &.keynotes {
+            margin-top: 60px;
+        }
     }
 
     .session-card {
         .img-wrap {
-            width: 60px;
+            width: 70px;
 
-            + .title {
-                width: calc(100% - 60px);
+            @include media-breakpoint-up(sm) {
+                width: 60px;
+
+                + .title {
+                    width: calc(100% - 60px);
+                }
             }
         }
 
@@ -469,6 +477,36 @@ img.aligncenter {
 
         .title {
             padding-right: 10px;
+
+            @include media-breakpoint-down(sm) {
+                h4 {
+                    font-size: 1.2rem;
+                }
+
+                h5 {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .meta {
+            @include media-breakpoint-down(sm) {
+                &::after {
+                    display: block;
+                    content: "";
+                    clear: both;
+                }
+            }
+        }
+
+        .categories {
+            clear: left;
+        }
+
+        .badges {
+            @include media-breakpoint-down(sm) {
+                clear: both;
+            }
         }
     }
 
@@ -489,6 +527,8 @@ img.aligncenter {
     }
 
     .description {
+        margin-top: 15px;
+
         @include media-breakpoint-up(md) {
             padding-left: 80px;
         }
@@ -509,6 +549,37 @@ img.aligncenter {
             background-color: #8BD6FD;
             color: #000000;
         }
+    }
+
+    .session-level {
+        font-size: 70%;
+
+        svg {
+            margin-right: 2px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &.beginner {
+            background-color: transparentize($red, .67);
+            color: #FFFFFF;
+        }
+
+        &.intermediate {
+            background-color: transparentize($red, .33);
+            color: #FFFFFF;
+        }
+
+        &.advanced {
+            background-color: transparentize($red, 0);
+            color: #FFFFFF;
+        }
+    }
+
+    .legend .session-level {
+        font-size: 80%;
     }
 }
 
