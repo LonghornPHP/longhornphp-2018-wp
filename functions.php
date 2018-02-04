@@ -186,7 +186,7 @@ add_action( 'widgets_init', 'base_theme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function base_theme_scripts() {
-	$version = '201802043';
+	$version = '201802044';
 	$url = get_site_url();
 
 	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );
@@ -268,7 +268,7 @@ add_filter( 'lphp_post_content', 'do_shortcode' );
 
 function lphp_get_stars_for_level($level) {
     $html = '';
-    $counts = ['beginner' => 1, 'intermediate' => 2, 'advanced' => 3];
+    $counts = ['entry' => 1, 'intermediate' => 2, 'advanced' => 3];
     for ($i = 0; $i < $counts[$level]; $i++) {
         $html .= '<i class="fas fa-star"></i>';
     }

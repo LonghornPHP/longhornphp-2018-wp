@@ -20,7 +20,7 @@ get_header();
                             <?php the_content(); ?>
                         </div>
                         <div class="legend">
-                            <span class="session-level badge badge-pill badge-light beginner">
+                            <span class="session-level badge badge-pill badge-light entry">
                                 <i class="fas fa-star"></i>
                             </span>
                             <span class="session-level badge badge-pill badge-light intermediate">
@@ -32,7 +32,7 @@ get_header();
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </span>
-                            - Beginner, Intermediate, Advanced
+                            - Entry, Intermediate, Advanced
                         </div>
                     </article>
 
