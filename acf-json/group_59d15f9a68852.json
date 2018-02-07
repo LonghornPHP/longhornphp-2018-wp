@@ -186,6 +186,27 @@
             "allow_null": 1,
             "allow_archives": 0,
             "multiple": 0
+        },
+        {
+            "key": "field_5a7a57b929b00",
+            "label": "Sponsors Page",
+            "name": "sponsors_page",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": [],
+            "allow_null": 1,
+            "allow_archives": 0,
+            "multiple": 0
         }
     ],
     "location": [
@@ -205,5 +226,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1517614306
+    "modified": 1517967302
 }

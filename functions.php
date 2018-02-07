@@ -269,7 +269,7 @@ add_filter( 'lphp_post_content', 'do_shortcode' );
 function lphp_get_stars_for_level($level) {
     $html = '';
     $counts = ['entry' => 1, 'intermediate' => 2, 'advanced' => 3];
-    for ($i = 0; $i < $counts[$level]; $i++) {
+    for ($i = 0; $i < ($counts[$level] ?? 0); $i++) {
         $html .= '<i class="fas fa-star"></i>';
     }
 

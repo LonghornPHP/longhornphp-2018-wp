@@ -44,6 +44,11 @@ get_header();
 
         </main>
     </div>
+
+    <div class="sponsors-list text-center mt-5">
+        <h2 class="mb-4">Sponsors</h2>
+        <?php get_template_part( 'template-parts/sponsors' ); ?>
+    </div>
 </div>
 
 <?php
