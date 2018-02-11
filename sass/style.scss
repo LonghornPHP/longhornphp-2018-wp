@@ -600,3 +600,17 @@ img.aligncenter {
         padding-bottom: 20px;
     }
 }
+
+.page-template-schedule {
+    @include media-breakpoint-down(md) {
+        .container.schedule {
+            max-width: none;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        .schedule table {
+            table-layout: fixed;
+        }
+    }
+}

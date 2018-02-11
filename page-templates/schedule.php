@@ -3,7 +3,7 @@
 get_header();
 ?>
 
-<div class="container archive speakers">
+<div class="container schedule">
     <div class="row">
         <main class="site-main col-sm-12">
             <?php if ( have_posts() ) : ?>
@@ -31,11 +31,12 @@ get_header();
                 <?php the_field($day . '_schedule_intro', 'options'); ?>
 
                 <?php if (have_rows($day . '_schedule_sessions', 'options')) : ?>
-                    <table class="table table-bordered" style="table-layout: fixed;">
+                    <div class="table-responsive-md">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th rowspan="2" style="width: 120px; vertical-align: middle;">Start</th>
-                                <th rowspan="2" style="width: 120px; vertical-align: middle;">End</th>
+                                <th rowspan="2" style="width: 100px; vertical-align: middle;">Start</th>
+                                <th rowspan="2" style="width: 100px; vertical-align: middle;">End</th>
                                 <th style="text-align: center;" colspan="<?php echo count($rooms); ?>">
                                 Room Name</th>
                             </tr>
@@ -85,6 +86,7 @@ get_header();
                             <?php endwhile; ?>
                         </tbody>
                     </table>
+                    </div>
                 <?php endif; ?>
 
             <?php endforeach; ?>
