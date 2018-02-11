@@ -80,6 +80,7 @@ get_header();
                                                     <br>
                                                     <?php $speakers = get_field('speaker_session_relationship', $session->ID); ?>
                                                     <?php if (!empty($speakers)) : ?>
+                                                        <?php $speakers = array_values($speakers); ?>
                                                         <small>by <a href="<?php the_field('speakers_page', 'options'); ?>#<?php echo esc_attr( $speakers[0]->post_name ); ?>">
                                                             <?php echo esc_html($speakers[0]->post_title); ?>
                                                         </a></small>
