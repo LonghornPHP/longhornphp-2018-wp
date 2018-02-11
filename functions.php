@@ -213,6 +213,11 @@ function lphp_acf_init() {
 		'page_title' => 'Theme Options',
 		'autoload' => true,
 	]);
+
+    acf_add_options_page([
+        'page_title' => 'Schedule',
+        'autoload' => true,
+    ]);
 }
 add_action( 'acf/init', 'lphp_acf_init' );
 
