@@ -67,7 +67,13 @@ get_header();
                                                 </td>
                                             <?php else : ?>
                                                 <?php $session = get_sub_field('session'); ?>
-                                                <td>
+                                                <td
+                                                    <?php if (get_sub_field('fills_block')) : ?>
+                                                        colspan="<?php echo count($rooms); ?>"
+                                                        align="center"
+                                                        style="vertical-align: middle;"
+                                                    <?php endif; ?>
+                                                    >
                                                     <a href="<?php the_field('sessions_page', 'options'); ?>#<?php echo esc_attr( $session->post_name ); ?>">
                                                         <?php echo esc_html($session->post_title); ?>
                                                     </a>
