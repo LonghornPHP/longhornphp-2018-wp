@@ -613,4 +613,21 @@ img.aligncenter {
             table-layout: fixed;
         }
     }
+
+    .day-schedule {
+        margin-bottom: 60px;
+    }
+
+    .start-end {
+        width: 100px;
+    }
+
+    .day-intro {
+        text-align: center;
+        margin-bottom: 20px;
+
+        :last-child {
+            margin-bottom: 0;
+        }
+    }
 }
