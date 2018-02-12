@@ -5,7 +5,7 @@ get_header();
 
 <div class="container schedule">
     <div class="row">
-        <main class="site-main col-sm-12">
+        <main class="site-main col-md-9">
             <?php if ( have_posts() ) : ?>
 
                 <header class="page-header mb-5">
@@ -39,8 +39,7 @@ get_header();
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th rowspan="2" class="start-end align-middle">Start</th>
-                                    <th rowspan="2" class="start-end align-middle">End</th>
+                                    <th rowspan="2" class="start-end align-middle">Start / End</th>
                                     <th style="text-align: center;" colspan="<?php echo count($rooms); ?>">
                                     Room Name</th>
                                 </tr>
@@ -55,8 +54,10 @@ get_header();
                             <tbody>
                                 <?php while (have_rows($day . '_schedule_sessions', 'options')) : the_row(); ?>
                                     <tr>
-                                        <td class="start-end"><?php the_sub_field('start_time'); ?></td>
-                                        <td class="start-end"><?php the_sub_field('end_time'); ?></td>
+                                        <td class="start-end">
+                                            <?php the_sub_field('start_time'); ?><br>
+                                            <?php the_sub_field('end_time'); ?>
+                                        </td>
                                         <?php if (have_rows('tracks')) : ?>
                                             <?php while (have_rows('tracks')) : the_row(); ?>
                                                 <?php if (get_sub_field('event_type') === 'Custom') : ?>
@@ -104,12 +105,16 @@ get_header();
             <?php endforeach; ?>
 
         </main>
+
+        <sidebar class="sponsors-sidebar mt-5 mt-md-0 col-md-3">
+            <?php get_sidebar(); ?>
+        </sidebar>
     </div>
 
-    <div class="sponsors-list text-center mt-5">
+    <!-- <div class="sponsors-list text-center mt-5">
         <h2 class="mb-4">Sponsors</h2>
         <?php get_template_part( 'template-parts/sponsors' ); ?>
-    </div>
+    </div> -->
 </div>
 
 <?php
