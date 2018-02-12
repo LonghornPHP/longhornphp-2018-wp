@@ -107,14 +107,11 @@ get_header();
         </main>
 
         <sidebar class="sponsors-sidebar mt-5 mt-md-0 col-md-3">
-            <?php get_sidebar(); ?>
+            <div class="sticky-top">
+                <?php get_sidebar(); ?>
+            </div>
         </sidebar>
     </div>
-
-    <!-- <div class="sponsors-list text-center mt-5">
-        <h2 class="mb-4">Sponsors</h2>
-        <?php get_template_part( 'template-parts/sponsors' ); ?>
-    </div> -->
 </div>
 
 <?php
