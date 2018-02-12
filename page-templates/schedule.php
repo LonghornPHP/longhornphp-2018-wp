@@ -107,9 +107,7 @@ get_header();
         </main>
 
         <sidebar class="sponsors-sidebar mt-5 mt-md-0 col-md-3">
-            <div class="sticky-top">
-                <?php get_sidebar(); ?>
-            </div>
+            <?php get_sidebar(); ?>
         </sidebar>
     </div>
 </div>
