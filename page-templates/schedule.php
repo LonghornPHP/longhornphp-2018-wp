@@ -104,6 +104,13 @@ get_header();
 
             <?php endforeach; ?>
 
+            <div class="section-register">
+                <div class="container">
+                    <h2 class="text-center">Register</h2>
+                    <?php the_field('registration_embed_code', 'options'); ?>
+                </div>
+            </div>
+
         </main>
 
         <sidebar class="sponsors-sidebar mt-5 mt-md-0 col-md-3">

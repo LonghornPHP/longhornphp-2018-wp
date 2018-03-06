@@ -81,41 +81,6 @@
             "new_lines": ""
         },
         {
-            "key": "field_59d15773a7985",
-            "label": "Registration",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_59d1577fa7987",
-            "label": "Registration Embed Code",
-            "name": "home_registration_embed_code",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 4,
-            "new_lines": ""
-        },
-        {
             "key": "field_59d1578fa7988",
             "label": "Sponsors",
             "name": "",
@@ -203,5 +168,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1517468657
+    "modified": 1520353864
 }

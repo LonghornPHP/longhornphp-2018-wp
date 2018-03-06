@@ -84,7 +84,7 @@ get_header();
 <div class="section-register" id="register" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>">
 	<div class="container">
 		<h2 class="text-center">Buy a Ticket</h2>
-		<?php the_field('home_registration_embed_code'); ?>
+		<?php the_field('registration_embed_code', 'options'); ?>
 	</div>
 </div>
 
