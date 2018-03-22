@@ -19,6 +19,7 @@
   "dependencies": {
     "@cmyee/pushy": "^1.1.2",
     "bootstrap": "^4.0.0",
+    "jquery-lazy": "^1.7.7",
     "node-sass": "^4.7.2",
     "popper.js": "^1.13.0"
   }

@@ -10,14 +10,6 @@
 
 <?php wp_footer(); ?>
 
-<script>
-    jQuery(document).ready(function($) {
-        if (typeof TitoWidget !== 'undefined') {
-            TitoWidget.buildWidgets();
-        }
-    });
-</script>
-
 <!-- https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery -->
 <script>
   var loadDeferredStyles = function() {

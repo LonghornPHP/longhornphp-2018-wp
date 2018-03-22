@@ -16,7 +16,7 @@
                         <?php endif; ?>
                             <strong class="sponsor-title"><?php the_title(); ?></strong>
                             <?php if (has_post_thumbnail() && $tier !== 'kickstarter') : ?>
-                                <?php the_post_thumbnail(); ?>
+                                <?php echo img_lazify( get_the_post_thumbnail( get_the_ID(), 'medium', ['class' => 'lazy'] ) ); ?>
                             <?php endif; ?>
                         <?php if ($link) : ?>
                         </a>

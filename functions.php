@@ -195,7 +195,7 @@ add_action('init', 'modify_jquery');
  * Enqueue scripts and styles.
  */
 function base_theme_scripts() {
-	$version = '201802112';
+	$version = '20180321';
 	$url = get_site_url();
 
 	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );
@@ -291,6 +291,14 @@ function lphp_get_stars_for_level($level) {
     }
 
     return $html;
+}
+
+function img_lazify($img) {
+    $img = str_replace('src=', 'data-src=', $img);
+    $img = str_replace('srcset=', 'data-srcset=', $img);
+    $img = str_replace('sizes=', 'data-sizes=', $img);
+
+    return $img;
 }
 
 /**

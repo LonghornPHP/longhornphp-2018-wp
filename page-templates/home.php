@@ -81,7 +81,7 @@ get_header();
 	</div>
 </div>
 
-<div class="section-register" id="register" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>">
+<div class="section-register lazy" id="register" data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>">
 	<div class="container">
 		<h2 class="text-center">Buy a Ticket</h2>
 		<?php the_field('registration_embed_code', 'options'); ?>
@@ -89,8 +89,8 @@ get_header();
 </div>
 
 <div
-	class="section-about"
-	style="background-image: url('<?php echo wp_get_attachment_image_url( get_field('home_description_image'), 'large' ); ?>');">
+	class="section-about lazy"
+	data-src="<?php echo wp_get_attachment_image_url( get_field('home_description_image'), 'large' ); ?>"
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10 col-lg-8 mx-auto text-center">

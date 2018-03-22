@@ -2,6 +2,7 @@ import Popper from 'popper.js/dist/umd/popper.js';
 window.Popper = Popper;
 import 'bootstrap';
 var jQuery = require('jquery');
+import 'jquery-lazy';
 
 jQuery(document).ready(function($){
     if (typeof Tito !== "undefined") {
@@ -20,4 +21,13 @@ jQuery(document).ready(function($){
     if ($('.page-template-venue').length) {
         $('.page-template-venue').scrollspy({ target: '#venue-nav', offset: 50 });
     }
+
+    if (typeof TitoWidget !== 'undefined') {
+        TitoWidget.buildWidgets();
+    }
+
+    $('.lazy').lazy({
+        combined: true,
+        delay: 5000
+    });
 });
