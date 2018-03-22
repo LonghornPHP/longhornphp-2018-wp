@@ -191,7 +191,10 @@ function base_theme_scripts() {
 
 	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );
 	wp_enqueue_style( 'longhornphp-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lora:400,700' );
-	wp_enqueue_style( 'mailchimp-embed', '//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css' );
+
+    if (is_page_template('page-templates/home.php') || is_page_template('page-templates/schedule.php')) {
+        wp_enqueue_script( 'tito-js', 'https://js.tito.io/v1', [], null, true );
+    }
 
 	if ( strpos( $url, '.dev' ) !== false && file_exists( get_template_directory() . '/hot' ) ) {
 		wp_enqueue_script( 'base_theme-main', '//localhost:8080/js/build/bundle.js', array( 'jquery' ), $version, true );

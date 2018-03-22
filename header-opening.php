@@ -41,3 +41,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N35VHB3"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<noscript id="deferred-styles">
+    <link rel="stylesheet" type="text/css" href="https://css.tito.io/v1.1"/>
+    <link rel="stylesheet" type="text/css" href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css"/>
+</noscript>
