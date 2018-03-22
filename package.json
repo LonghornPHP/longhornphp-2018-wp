@@ -6,15 +6,16 @@
   "author": "dabernathy89",
   "license": "GPL-2.0",
   "scripts": {
-    "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "rm -rf ./js/build && rm -rf css && NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "rm -rf ./js/build && rm -rf css && NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
     "browser-sync": "^2.23.6",
     "browser-sync-webpack-plugin": "^1.2.0",
-    "laravel-mix": "^2.1"
+    "laravel-mix": "^2.1",
+    "md5": "^2.2.1"
   },
   "dependencies": {
     "@cmyee/pushy": "^1.1.2",

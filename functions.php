@@ -197,19 +197,33 @@ add_action('init', 'modify_jquery');
 function base_theme_scripts() {
 	$version = '20180321';
 	$url = get_site_url();
+    $webpack_paths = [];
 
-	wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . '/css/style.css', array(), $version );
-	wp_enqueue_style( 'longhornphp-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lora:400,700' );
+    if (file_exists(get_template_directory() . '/mix-manifest.json')) {
+        $webpack_paths = json_decode(file_get_contents(get_template_directory() . '/mix-manifest.json'), true);
+    }
+
+    if ( strpos( $url, '.dev' ) !== false && file_exists( get_template_directory() . '/hot' ) ) {
+        wp_enqueue_script( 'base_theme-main', '//localhost:8080/js/build/bundle.js', array( 'jquery' ), $version, true );
+    } else {
+        foreach ($webpack_paths as $path) {
+            if (strpos($path, '.js') === strlen($path) - 3) {
+                wp_enqueue_script( 'base_theme-main', get_template_directory_uri() . $path, array( 'jquery' ), null, true );
+            }
+        }
+    }
+
+    foreach ($webpack_paths as $path) {
+        if (strpos($path, '.css') === strlen($path) - 4) {
+            wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . $path, array(), null );
+        }
+    }
+
+    wp_enqueue_style( 'longhornphp-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lora:400,700' );
 
     if (is_page_template('page-templates/home.php') || is_page_template('page-templates/schedule.php')) {
         wp_enqueue_script( 'tito-js', 'https://js.tito.io/v1', [], null, true );
     }
-
-	if ( strpos( $url, '.dev' ) !== false && file_exists( get_template_directory() . '/hot' ) ) {
-		wp_enqueue_script( 'base_theme-main', '//localhost:8080/js/build/bundle.js', array( 'jquery' ), $version, true );
-	} else {
-		wp_enqueue_script( 'base_theme-main', get_template_directory_uri() . '/js/build/bundle.js', array( 'jquery' ), $version, true );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'base_theme_scripts' );
 
