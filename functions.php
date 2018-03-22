@@ -185,7 +185,7 @@ add_action( 'widgets_init', 'base_theme_widgets_init' );
 function modify_jquery() {
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);
+        wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], null, true);
         wp_enqueue_script('jquery');
     }
 }
