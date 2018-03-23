@@ -33,12 +33,16 @@ jQuery(document).ready(function($){
         $('.page-template-venue').scrollspy({ target: '#venue-nav', offset: 50 });
     }
 
-    if (typeof TitoWidget !== 'undefined') {
-        TitoWidget.buildWidgets();
-    }
-
     $('.lazy').lazy({
         combined: true,
-        delay: 5000
+        // delay: 5000,
+
+        titoLazyLoader: function(element) {
+            if (typeof TitoWidget !== 'undefined') {
+                TitoWidget.buildWidgets();
+                element.load();
+            }
+        },
     });
+
 });
