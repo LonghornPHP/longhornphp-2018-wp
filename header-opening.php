@@ -31,8 +31,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-N35VHB3');</script>
 <!-- End Google Tag Manager -->
 
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
 <?php wp_head(); ?>
 </head>
 

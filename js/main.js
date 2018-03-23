@@ -4,6 +4,17 @@ import 'bootstrap';
 var jQuery = require('jquery');
 import 'jquery-lazy';
 
+import fontawesome from '@fortawesome/fontawesome';
+import faFacebookF from '@fortawesome/fontawesome-free-brands/faFacebookF';
+import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter';
+import faStar from '@fortawesome/fontawesome-free-solid/faStar';
+import faTwitterSquare from '@fortawesome/fontawesome-free-brands/faTwitterSquare';
+import faUser from '@fortawesome/fontawesome-free-solid/faUser';
+import faBriefcase from '@fortawesome/fontawesome-free-solid/faBriefcase';
+import faTimesCircle from '@fortawesome/fontawesome-free-solid/faTimesCircle';
+
+fontawesome.library.add(faFacebookF, faTwitter, faStar, faTwitterSquare, faUser, faBriefcase, faTimesCircle);
+
 jQuery(document).ready(function($){
     if (typeof Tito !== "undefined") {
         Tito.on('event:landing', function(data){
