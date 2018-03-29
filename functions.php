@@ -228,8 +228,9 @@ function base_theme_scripts() {
 add_action( 'wp_enqueue_scripts', 'base_theme_scripts' );
 
 function lphp_menu_social_icons($items, $args) {
-	$items = str_replace('>Facebook<', '><i class="fab fa-facebook-f"></i><', $items);
-	$items = str_replace('>Twitter<', '><i class="fab fa-twitter"></i><', $items);
+	$items = str_replace('>Facebook<', '><i title="Facebook" class="fab fa-facebook-f"></i><', $items);
+	$items = str_replace('>Twitter<', '><i title="Twitter" class="fab fa-twitter"></i><', $items);
+    $items = str_replace('>Wurstcon<', '><span class="hidden-accessible">Wurstcon </span>🌭<', $items);
 	return $items;
 }
 add_filter( 'wp_nav_menu_items', 'lphp_menu_social_icons', 10, 2 );
