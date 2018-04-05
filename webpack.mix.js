@@ -4,7 +4,7 @@ require('dotenv').config();
 let hash = new Date();
 hash = '-' + md5(hash.getTime());
 
-if (process.env !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     hash = '';
 }
 
