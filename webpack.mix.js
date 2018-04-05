@@ -2,7 +2,11 @@ let mix = require('laravel-mix');
 var md5 = require('md5');
 require('dotenv').config();
 let hash = new Date();
-hash = md5(hash.getTime());
+hash = '-' + md5(hash.getTime());
+
+if (process.env !== 'production') {
+    hash = '';
+}
 
 /*
  |--------------------------------------------------------------------------
@@ -35,9 +39,9 @@ mix.setPublicPath(path.resolve('./'))
             'node_modules/@cmyee/pushy/js/pushy.js',
             'js/main.js'
         ],
-        'js/build/bundle-' + hash + '.js'
+        'js/build/bundle' + hash + '.js'
     )
-    .sass('sass/style.scss', 'css/style-' + hash + '.css')
+    .sass('sass/style.scss', 'css/style' + hash + '.css')
     .sourceMaps()
     .browserSync({
         proxy: proxy_url,

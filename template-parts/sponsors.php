@@ -15,6 +15,19 @@
                         <a target="_blank" href="<?php echo get_post_meta( get_the_ID(), 'sponsor_link', true ); ?>">
                         <?php endif; ?>
                             <strong class="sponsor-title"><?php the_title(); ?></strong>
+                        <?php if ($link) : ?>
+                        </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                <?php while ($sponsors->have_posts()) : $sponsors->the_post(); ?>
+                    <div class="col-sm-6 col-lg-3 sponsor">
+                        <?php $link = get_post_meta( get_the_ID(), 'sponsor_link', true ); ?>
+                        <?php if ($link) : ?>
+                        <a target="_blank" href="<?php echo get_post_meta( get_the_ID(), 'sponsor_link', true ); ?>">
+                        <?php endif; ?>
                             <?php if (has_post_thumbnail() && $tier !== 'kickstarter') : ?>
                                 <?php echo img_lazify( get_the_post_thumbnail( get_the_ID(), 'medium', ['class' => 'lazy'] ) ); ?>
                             <?php endif; ?>

@@ -125,49 +125,49 @@ function fill_sessions_with_speakers($sessions) {
 		return $sessions;
 	}
 
-    global $wpdb;
+	global $wpdb;
 
-    // First, get the speaker IDs associated with the sessions
-    $session_ids = array_map(function($session) {
-        return $session->ID;
-    }, $sessions);
+	// First, get the speaker IDs associated with the sessions
+	$session_ids = array_map(function($session) {
+		return $session->ID;
+	}, $sessions);
 
-    $query = 'SELECT post_id, meta_value from ' . $wpdb->prefix . 'postmeta ';
-    $query .= 'WHERE meta_key = "speaker_session_relationship" ';
-    $query .= 'AND meta_value != ""';
-    $query .= 'AND post_id IN (' . implode(', ', array_fill(0, count($session_ids), '%d')) . ')';
-    $results = $wpdb->get_results( $wpdb->prepare($query, $session_ids), ARRAY_A );
-    $speaker_ids = [];
-    foreach ($results as $result) {
-        $speaker_ids[$result['post_id']] = unserialize($result['meta_value']);
-    }
-    $flattened_speaker_ids = empty($speaker_ids) ? [] : call_user_func_array('array_merge', $speaker_ids);
+	$query = 'SELECT post_id, meta_value from ' . $wpdb->prefix . 'postmeta ';
+	$query .= 'WHERE meta_key = "speaker_session_relationship" ';
+	$query .= 'AND meta_value != ""';
+	$query .= 'AND post_id IN (' . implode(', ', array_fill(0, count($session_ids), '%d')) . ')';
+	$results = $wpdb->get_results( $wpdb->prepare($query, $session_ids), ARRAY_A );
+	$speaker_ids = [];
+	foreach ($results as $result) {
+		$speaker_ids[$result['post_id']] = unserialize($result['meta_value']);
+	}
+	$flattened_speaker_ids = empty($speaker_ids) ? [] : call_user_func_array('array_merge', $speaker_ids);
 
-    $speakers = get_posts([
-        'post_type' => 'speaker',
-        'posts_per_page' => -1,
-        'post__in' => $flattened_speaker_ids,
-        'post_status' => 'publish',
-    ]);
+	$speakers = get_posts([
+		'post_type' => 'speaker',
+		'posts_per_page' => -1,
+		'post__in' => $flattened_speaker_ids,
+		'post_status' => 'publish',
+	]);
 
-    foreach ($sessions as $session) {
-        $session->speakers = [];
-    }
+	foreach ($sessions as $session) {
+		$session->speakers = [];
+	}
 
-    foreach ($speaker_ids as $session_id => $session_speaker_ids) {
-        foreach ($sessions as $session) {
-            if ($session->ID === $session_id) {
-                $session->speakers = array_values(array_filter($speakers, function($speaker) use ($session_speaker_ids) {
-                    if (in_array($speaker->ID, $session_speaker_ids)) {
-                        return true;
-                    }
-                }));
-                break;
-            }
-        }
-    }
+	foreach ($speaker_ids as $session_id => $session_speaker_ids) {
+		foreach ($sessions as $session) {
+			if ($session->ID === $session_id) {
+				$session->speakers = array_values(array_filter($speakers, function($speaker) use ($session_speaker_ids) {
+					if (in_array($speaker->ID, $session_speaker_ids)) {
+						return true;
+					}
+				}));
+				break;
+			}
+		}
+	}
 
-    return $sessions;
+	return $sessions;
 }
 
 function base_theme_widgets_init() {
@@ -183,11 +183,11 @@ function base_theme_widgets_init() {
 add_action( 'widgets_init', 'base_theme_widgets_init' );
 
 function modify_jquery() {
-    if (!is_admin()) {
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], null, true);
-        wp_enqueue_script('jquery');
-    }
+	if (!is_admin()) {
+		wp_deregister_script('jquery');
+		wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], null, true);
+		wp_enqueue_script('jquery');
+	}
 }
 add_action('init', 'modify_jquery');
 
@@ -197,40 +197,38 @@ add_action('init', 'modify_jquery');
 function base_theme_scripts() {
 	$version = '20180321';
 	$url = get_site_url();
-    $webpack_paths = [];
+	$webpack_paths = [];
 
-    if (file_exists(get_template_directory() . '/mix-manifest.json')) {
-        $webpack_paths = json_decode(file_get_contents(get_template_directory() . '/mix-manifest.json'), true);
-    }
+	if (file_exists(get_template_directory() . '/mix-manifest.json')) {
+		$webpack_paths = json_decode(file_get_contents(get_template_directory() . '/mix-manifest.json'), true);
+	}
 
-    if ( strpos( $url, '.dev' ) !== false && file_exists( get_template_directory() . '/hot' ) ) {
-        wp_enqueue_script( 'base_theme-main', '//localhost:8080/js/build/bundle.js', array( 'jquery' ), $version, true );
-    } else {
-        foreach ($webpack_paths as $path) {
-            if (strpos($path, '.js') === strlen($path) - 3) {
-                wp_enqueue_script( 'base_theme-main', get_template_directory_uri() . $path, array( 'jquery' ), null, true );
-            }
-        }
-    }
+	if ( strpos( $url, '.test' ) !== false && file_exists( get_template_directory() . '/hot' ) ) {
+		wp_enqueue_script( 'base_theme-main', '//localhost:8080/js/build/bundle.js', array( 'jquery' ), $version, true );
+		wp_enqueue_style( 'base_theme-style', '//localhost:8080/css/style.css', array(), null );
+	} else {
+		foreach ($webpack_paths as $path) {
+			if (strpos($path, '.js') === strlen($path) - 3) {
+				wp_enqueue_script( 'base_theme-main', get_template_directory_uri() . $path, array( 'jquery' ), null, true );
+			}
+			if (strpos($path, '.css') === strlen($path) - 4) {
+				wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . $path, array(), null );
+			}
+		}
+	}
 
-    foreach ($webpack_paths as $path) {
-        if (strpos($path, '.css') === strlen($path) - 4) {
-            wp_enqueue_style( 'base_theme-style', get_template_directory_uri() . $path, array(), null );
-        }
-    }
+	wp_enqueue_style( 'longhornphp-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lora:700' );
 
-    wp_enqueue_style( 'longhornphp-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lora:700' );
-
-    if (is_page_template('page-templates/home.php') || is_page_template('page-templates/schedule.php')) {
-        wp_enqueue_script( 'tito-js', 'https://js.tito.io/v1', [], null, true );
-    }
+	if (is_page_template('page-templates/home.php') || is_page_template('page-templates/schedule.php')) {
+		wp_enqueue_script( 'tito-js', 'https://js.tito.io/v1', [], null, true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'base_theme_scripts' );
 
 function lphp_menu_social_icons($items, $args) {
 	$items = str_replace('>Facebook<', '><i title="Facebook" class="fab fa-facebook-f"></i><', $items);
 	$items = str_replace('>Twitter<', '><i title="Twitter" class="fab fa-twitter"></i><', $items);
-    $items = str_replace('>Wurstcon<', '><span class="hidden-accessible">Wurstcon </span>🌭<', $items);
+	$items = str_replace('>Wurstcon<', '><span class="hidden-accessible">Wurstcon </span>🌭<', $items);
 	return $items;
 }
 add_filter( 'wp_nav_menu_items', 'lphp_menu_social_icons', 10, 2 );
@@ -241,10 +239,10 @@ function lphp_acf_init() {
 		'autoload' => true,
 	]);
 
-    acf_add_options_page([
-        'page_title' => 'Schedule',
-        'autoload' => true,
-    ]);
+	acf_add_options_page([
+		'page_title' => 'Schedule',
+		'autoload' => true,
+	]);
 }
 add_action( 'acf/init', 'lphp_acf_init' );
 
@@ -299,21 +297,21 @@ add_filter( 'lphp_post_content', 'shortcode_unautop' );
 add_filter( 'lphp_post_content', 'do_shortcode' );
 
 function lphp_get_stars_for_level($level) {
-    $html = '';
-    $counts = ['entry' => 1, 'intermediate' => 2, 'advanced' => 3];
-    for ($i = 0; $i < ($counts[$level] ?? 0); $i++) {
-        $html .= '<i class="fas fa-star"></i>';
-    }
+	$html = '';
+	$counts = ['entry' => 1, 'intermediate' => 2, 'advanced' => 3];
+	for ($i = 0; $i < ($counts[$level] ?? 0); $i++) {
+		$html .= '<i class="fas fa-star"></i>';
+	}
 
-    return $html;
+	return $html;
 }
 
 function img_lazify($img) {
-    $img = str_replace('src=', 'data-src=', $img);
-    $img = str_replace('srcset=', 'data-srcset=', $img);
-    $img = str_replace('sizes=', 'data-sizes=', $img);
+	$img = str_replace('src=', 'data-src=', $img);
+	$img = str_replace('srcset=', 'data-srcset=', $img);
+	$img = str_replace('sizes=', 'data-sizes=', $img);
 
-    return $img;
+	return $img;
 }
 
 /**
