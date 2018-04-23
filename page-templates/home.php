@@ -81,13 +81,6 @@ get_header();
 	</div>
 </div>
 
-<div class="section-register lazy" id="register" data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>">
-	<div class="container">
-		<h2 class="text-center">Buy a Ticket</h2>
-		<?php the_field('registration_embed_code', 'options'); ?>
-	</div>
-</div>
-
 <div
 	class="section-about lazy"
 	data-src="<?php echo wp_get_attachment_image_url( get_field('home_description_image'), 'large' ); ?>"
